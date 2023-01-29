@@ -16,11 +16,7 @@ class CustomAuthController extends Controller
         return view('auth.registration');
     }
     public function registerUser(Request $request){
-        $request->validate([
-            'name'=>'required',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:5'
-        ]);
+        
         $user=new User();
         $user->name=$request->name;
         $user->password=Hash::make($request->password);

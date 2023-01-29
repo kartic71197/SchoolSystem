@@ -22,10 +22,10 @@
           <a class="nav-link active" aria-current="page" href="/admindashboard">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="createcourses">Create Courses</a>
+          <a class="nav-link" href="#">Students</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="viewhere">View Courses</a>
+          <a class="nav-link" href="course">Courses</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

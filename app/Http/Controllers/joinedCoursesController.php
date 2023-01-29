@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\User;
 
-class courseController extends Controller
+class joinedCoursesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +14,9 @@ class courseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-       $course = Course::all();
-        return view('showallcourses')->with('course',$course);    
+    {             
+          $course = Course::all();
+        return view('studentcourses')->with('course',$course);    
     }
 
     /**
@@ -23,17 +24,10 @@ class courseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request){
-       
-        
-       /* if($res){
-            return back()->with('success','Created Successfull');
-        }
-        else{
-            return back()->with('fail','Try Again');
-        }*/
+    public function create()
+    {
+        //
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -42,18 +36,8 @@ class courseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {    $request->validate([
-        'courseName'=>'required',
-        'courseCode'=>'required|unique:courses',
-        'teacherId'=>'required'
-         ]); 
-               
-        $course=new Course();
-        $course->courseName=$request->courseName;
-        $course->courseCode=$request->courseCode;
-        $course->teacherId=$request->teacherId;
-        $course->save();
-        return redirect('course');
+    {
+        //
     }
 
     /**
@@ -64,7 +48,8 @@ class courseController extends Controller
      */
     public function show($id)
     {
-        //
+        $list = Course::find($id);
+        return redirect('studentcourses')->with('list',$list);
     }
 
     /**
@@ -87,14 +72,8 @@ class courseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $course= Course::find($id);
-        $course->courseName=$request->courseName;
-        $course->courseCode=$request->courseCode;
-        $course->teacherId=$request->teacherId;
-        $course->save();
-        return redirect('course');
+        //
     }
-    
 
     /**
      * Remove the specified resource from storage.
@@ -104,17 +83,6 @@ class courseController extends Controller
      */
     public function destroy($id)
     {
-           $course = Course::find($id);
-           $course -> delete();
-           return redirect('course');
-
+        //
     }
-
-
-    public function createcourses()
-        {
-            return view('admin.createcourses');
-        }
-        
-  
 }

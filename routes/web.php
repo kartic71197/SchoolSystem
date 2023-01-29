@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\courseController;;
+use App\Http\Controllers\courseController;
+use App\Http\Controllers\joinedCoursesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,8 @@ use App\Http\Controllers\courseController;;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('course',courseController::class);
+Route::resource('joinedcourse',joinedCoursesController::class);
 Route::get('/login',[CustomAuthController::class,'login']);
 Route::get('/registration',[CustomAuthController::class,'registration']);
 Route::post('/register-user',[CustomAuthController::class,'registerUser'])->name('register-user');
@@ -27,7 +30,4 @@ Route::get('/logout',[CustomAuthController::class,'logout']);
 Route::get('/adminlogin',[AdminController::class,'adminlogin']);
 Route::post('/admin-login',[AdminController::class,'adminlogindata'])->name('admin-login');
 Route::get('/admindashboard',[AdminController::class,'admindashboard']);
-Route::get('/createcourses',[courseController::class,'createcourses']);
-Route::post('/course-create',[courseController::class,'create'])->name('course-create');
-Route::get('viewhere',[courseController::class,'index']);
-Route::view('viewcourses','viewcourses');
+
