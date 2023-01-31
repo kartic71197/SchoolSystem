@@ -16,11 +16,20 @@ use App\Http\Controllers\joinedCoursesController;
 |
 */
 
+//For Log Data
+Route::get('/log',function(){ 
+    Log::info('Log Data');
+    dd("done");
+});
+
+//For View Page
 Route::get('/', function () {
     return view('welcome');
 });
+
+//For Creating Courses by Admin and will route the view/showallcourses  
 Route::resource('course',courseController::class);
-Route::resource('joinedcourse',joinedCoursesController::class);
+Route::resource('joinedcourses',joinedCoursesController::class);
 Route::get('/login',[CustomAuthController::class,'login']);
 Route::get('/registration',[CustomAuthController::class,'registration']);
 Route::post('/register-user',[CustomAuthController::class,'registerUser'])->name('register-user');
@@ -30,4 +39,5 @@ Route::get('/logout',[CustomAuthController::class,'logout']);
 Route::get('/adminlogin',[AdminController::class,'adminlogin']);
 Route::post('/admin-login',[AdminController::class,'adminlogindata'])->name('admin-login');
 Route::get('/admindashboard',[AdminController::class,'admindashboard']);
+Route::get('delete/{id}',[AdminController::class,'delete']);
 

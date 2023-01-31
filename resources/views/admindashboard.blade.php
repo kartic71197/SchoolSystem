@@ -27,6 +27,9 @@
         <li class="nav-item">
           <a class="nav-link" href="course">Courses</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout">Logout</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown link
@@ -41,9 +44,40 @@
     </div>
   </div>
 </nav>
-
-
+<div class="container-fluid">
+  <div class="row">
     
+
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <td>Id.</td>
+        <td>name<td>
+        <td>Course Name</td>
+        <td>Course Code</td>
+        <td>Teacher Id</td>
+        <td></td>
+        
+      </tr>
+    </thead>
+    <tbody>
+                                @foreach($joinedCourses as $j)
+                                @csrf
+      <tr>
+        <td>{{$j['id']}}</td>
+        <td>{{$j['name']}}</td>
+        <td>{{$j->courseName}}</td>
+        <td>{{$j->courseCode}}</td>
+        <td>{{$j->teacherId}}</td>
+        <td><a href={{"delete/".$j['id'] }} class="btn btn-danger">Remove Student</a></td>
+      </tr>
+                                
+                                @endforeach
+    </tbody>
+  </table>
+</div>
+</div></div>  
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\joinedCourse;
 use App\Models\User;
+
+use Hash;
+use Session;
 
 class joinedCoursesController extends Controller
 {
@@ -13,10 +17,26 @@ class joinedCoursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {             
-          $course = Course::all();
-        return view('studentcourses')->with('course',$course);    
+    public function index(Request $request)
+    {
+        $user=User::where('email','=',$request->email)->first();
+            if($user)
+            {
+                        if(Hash::check($request->password,$user->password))
+                        {
+                             $request->Session()->put('loginId',$user->id);
+                        }
+            }
+            $data=array();
+        if(Session::has('loginId')){
+            $data=User::where('id','=',Session::get('loginId'))->first();
+        }
+           
+          //  $joinedCourses=array();
+            $joinedCourses = joinedCourse::all();
+                $list=array();       
+                $course = Course::all();
+                 return view('studentcourses',compact('joinedCourses'))->with('course',$course);    
     }
 
     /**
@@ -35,9 +55,33 @@ class joinedCoursesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $req)
+    {   
+       
+        
+        $data=array();
+        if(Session::has('loginId')){
+            $data=User::where('id','=',Session::get('loginId'))->first();
+        }  
+        
+       
+        
+            
+                $joinedCourses=new joinedCourse();
+                $joinedCourses->name        = $data->name;
+                $joinedCourses->email       = $data->email;
+                $joinedCourses->courseName  = $req->courseName;
+                $joinedCourses->courseCode  = $req->courseCode;
+                $joinedCourses->teacherId   = $req->teacherId;
+                $joinedCourses->save();
+                return redirect('joinedcourses')->with('joinedcourses',$joinedCourses);
+               
+          
+        
+      
+       
+       
+       
     }
 
     /**
@@ -48,7 +92,7 @@ class joinedCoursesController extends Controller
      */
     public function show($id)
     {
-        $list = Course::find($id);
+        $list = Course::where('id','=',id);
         return redirect('studentcourses')->with('list',$list);
     }
 
@@ -83,6 +127,9 @@ class joinedCoursesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $course = joinedCourse::find($id);
+        $course -> delete();
+        return redirect('joinedcourses');
+
     }
 }

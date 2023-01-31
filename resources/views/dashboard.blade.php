@@ -23,7 +23,10 @@
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="joinedcourse">Courses</a>
+          <a class="nav-link" href="joinedcourses">Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout">Logout</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,6 +42,9 @@
     </div>
   </div>
 </nav>
+<div class="float-right mr-5">
+        <a href="view_courses" class="btn btn-danger">View Courses</a>
+        </div>
 
 
     

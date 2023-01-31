@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\joinedCourse;
 use Hash;
 use Session;
 
@@ -48,13 +49,14 @@ class CustomAuthController extends Controller
         else{
             return back()->with('fail','Email do not exist!');
         }
+        
     }
     public function dashboard(){
         $data=array();
         if(Session::has('loginId')){
             $data=User::where('id','=',Session::get('loginId'))->first();
         }
-        return view('dashboard',compact('data'));
+      
     }
     public function logout(){
         if(Session::has('loginId')){     
