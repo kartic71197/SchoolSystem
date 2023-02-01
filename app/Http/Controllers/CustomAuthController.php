@@ -13,13 +13,21 @@ class CustomAuthController extends Controller
     public function login(){
         return view('auth.login');
     }
+
     public function registration(){
         return view('auth.registration');
     }
+
     public function registerUser(Request $request){
-        
+        $request->validate([
+            'name'=>'required|uppercase',
+            'lastname'=>'required|',
+            'email'=>'required|email',
+            'password'=>'required|min:5'
+        ]);
         $user=new User();
         $user->name=$request->name;
+        $user->lastname=$request->lastname;
         $user->password=Hash::make($request->password);
         $user->email=$request->email;
         $res=$user->save();
@@ -30,6 +38,8 @@ class CustomAuthController extends Controller
             return back()->with('fail','Try Again');
         }
     }
+    
+    
     public function loginUser(Request $request){
         $request->validate([
             'email'=>'required|email',
@@ -51,13 +61,17 @@ class CustomAuthController extends Controller
         }
         
     }
+    
+    
     public function dashboard(){
         $data=array();
         if(Session::has('loginId')){
             $data=User::where('id','=',Session::get('loginId'))->first();
         }
-      
-    }
+        return view('dashboard',compact('data'));
+      }
+    
+    
     public function logout(){
         if(Session::has('loginId')){     
             Session::pull('loginId');

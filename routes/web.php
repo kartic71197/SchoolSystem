@@ -19,12 +19,12 @@ use App\Http\Controllers\joinedCoursesController;
 //For Log Data
 Route::get('/log',function(){ 
     Log::info('Log Data');
-    dd("done");
+   
 });
 
 //For View Page
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcomePage');
 });
 
 //For Creating Courses by Admin and will route the view/showallcourses  
@@ -40,4 +40,5 @@ Route::get('/adminlogin',[AdminController::class,'adminlogin']);
 Route::post('/admin-login',[AdminController::class,'adminlogindata'])->name('admin-login');
 Route::get('/admindashboard',[AdminController::class,'admindashboard']);
 Route::get('delete/{id}',[AdminController::class,'delete']);
-
+Route::get('/showstudents',[AdminController::class,'showstudents']);
+Route::get('/adminlogout',[AdminController::class,'adminlogout']);

@@ -32,8 +32,8 @@ class joinedCoursesController extends Controller
             $data=User::where('id','=',Session::get('loginId'))->first();
         }
            
-          //  $joinedCourses=array();
-            $joinedCourses = joinedCourse::all();
+           // $joinedCourses=array();
+            $joinedCourses = joinedCourse::where('email','=',$data->email)->get();
                 $list=array();       
                 $course = Course::all();
                  return view('studentcourses',compact('joinedCourses'))->with('course',$course);    
@@ -57,16 +57,10 @@ class joinedCoursesController extends Controller
      */
     public function store(Request $req)
     {   
-       
-        
-        $data=array();
+     $data=array();
         if(Session::has('loginId')){
             $data=User::where('id','=',Session::get('loginId'))->first();
-        }  
-        
-       
-        
-            
+        }         
                 $joinedCourses=new joinedCourse();
                 $joinedCourses->name        = $data->name;
                 $joinedCourses->email       = $data->email;
@@ -74,14 +68,7 @@ class joinedCoursesController extends Controller
                 $joinedCourses->courseCode  = $req->courseCode;
                 $joinedCourses->teacherId   = $req->teacherId;
                 $joinedCourses->save();
-                return redirect('joinedcourses')->with('joinedcourses',$joinedCourses);
-               
-          
-        
-      
-       
-       
-       
+                return redirect('joinedcourses')->with('joinedcourses',$joinedCourses); 
     }
 
     /**

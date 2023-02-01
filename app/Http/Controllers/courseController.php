@@ -15,7 +15,7 @@ class courseController extends Controller
     public function index()
     {
        $course = Course::all();
-        return view('showallcourses')->with('course',$course);    
+        return view('createcourses')->with('course',$course);    
     }
 
     /**
