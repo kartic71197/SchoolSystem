@@ -23,19 +23,19 @@
         
     <body>
              <!-- Sidebar/menu -->
-        <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
-                <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
-            <div class="w3-container">
-                <h3 class="w3-padding-64"><b>Welcome<br></b></h3>
-            </div>
+             <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+      <div class="w3-container">
+        <h3 class="w3-padding-64"><b>Welcome<br>{{$data->name}}</b></h3>
+      </div>
     
-            <div class="w3-bar-block">
-                <a href="/dashboard"  class="w3-bar-item w3-button w3-hover-white">Home</a> 
-                <a href="joinedcourses" class="w3-bar-item w3-button w3-hover-white">Join Course</a> 
-                <a href="joinedcourses"  class="w3-bar-item w3-button w3-hover-white">View Courses</a> 
-                <a href="/logout"  class="w3-bar-item w3-button w3-hover-white">Logout</a> 
-            </div>
-        </nav>
+      <div class="w3-bar-block">
+        <a href="/dashboard"  class="w3-bar-item w3-button w3-hover-white">Home</a> 
+        <a href="joinedcourses" class="w3-bar-item w3-button w3-hover-white">Join Course</a> 
+        <a href="joinedcourses"  class="w3-bar-item w3-button w3-hover-white">View Courses</a> 
+        <a href="/logout"  class="w3-bar-item w3-button w3-hover-white">Logout</a> 
+      </div>
+  </nav>
             
         <!-- !PAGE CONTENT! -->
         <div class="w3-main" style="margin-left:340px;margin-right:40px"> 
@@ -57,7 +57,7 @@
                         <thead class="table-dark">
                                 <tr>
                                     <td>Id</td>
-                                    <td>Name</td>
+                                 
                                     <td>Course Name</td>
                                     <td>Course Code</td>
                                     <td>Teacher Id</td>
@@ -69,7 +69,7 @@
                             @foreach($joinedCourses as $j)    
                                 <tr>
                                     <td>{{$j->id}}</td>
-                                    <td>{{$j->name}}</td>
+                                    
                                     <td>{{$j->courseName}}</td>
                                     <td>{{$j->courseCode}}</td>
                                     <td>{{$j->teacherId}}</td>

@@ -21,8 +21,8 @@ class CustomAuthController extends Controller
     public function registerUser(Request $request){
         $request->validate([
             'name'=>'required|uppercase',
-            'lastname'=>'required|',
-            'email'=>'required|email',
+            'lastname'=>'required',
+            'email'=>'required|email|unique:users',
             'password'=>'required|min:5'
         ]);
         $user=new User();

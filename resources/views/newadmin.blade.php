@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Student Login Page</title>
+<title>Admin Adding Page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -21,14 +21,16 @@ body {font-size:16px;}
 <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
   <div class="w3-container">
-    <h3 class="w3-padding-64"><b>Welcome<br>Student</b></h3>
+    <h3 class="w3-padding-64"><b>Welcome<br>Admin</b></h3>
   </div>
   <div class="w3-bar-block">
-    <a href="/"  class="w3-bar-item w3-button w3-hover-white">Home</a> 
-    <a href="/adminlogin"  class="w3-bar-item w3-button w3-hover-white">Admin Login</a> 
-    <a href="/login"  class="w3-bar-item w3-button w3-hover-white">Student Login</a> 
-    <a href="/registration"  class="w3-bar-item w3-button w3-hover-white">Create Account</a> 
-    <a href="#showcase"  class="w3-bar-item w3-button w3-hover-white">About Us</a> 
+ 
+        <a href="/admindashboard"  class="w3-bar-item w3-button w3-hover-white">Home</a> 
+        <a href="course" class="w3-bar-item w3-button w3-hover-white">Create Course</a> 
+        <a href="/showstudents"  class="w3-bar-item w3-button w3-hover-white">View Students</a> 
+        <a href='newadmin'  class="w3-bar-item w3-button w3-hover-white">Add Admin</a> 
+        <a href="/adminlogout"  class="w3-bar-item w3-button w3-hover-white">Logout</a> 
+      </div>
     
   </div>
 </nav>
@@ -46,10 +48,10 @@ body {font-size:16px;}
   <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4" style="margin-top:20px;">
-                <h4>Registration</h4>
+                <h4>Register New Admin</h4>
                 <hr>
 
-<form action="{{route('register-user')}}" method="post">
+<form action="{{route('addnewadmin')}}" method="post">
     @if(Session::has('success'))
         <div class="alert alert-success">{{Session::get('success')}}</div>
     @endif
@@ -58,6 +60,12 @@ body {font-size:16px;}
     @endif
     @csrf
            <div class="form-group">
+           <div class="form-group">
+                 <label for="role">Assign Role:</label><br>
+                 <input type='radio' placeholder="Admin" name="role" value="1">Admin<br>
+                 <input type='radio' placeholder="Teacher" name="role" value="2">Teacher<hr>
+                 <span class="text-danger">@error('role'){{$message}} @enderror</span>
+                </div>
                  <label for="name">First Name</label>
                  <input  type='text' class="form-control" placeholder="Enter in Capital Letters" name="name" value="{{old('name')}}">
                 <span class="text-danger">@error('name'){{$message}} @enderror</span>
@@ -66,19 +74,19 @@ body {font-size:16px;}
                 <label for="name">Last Name</label>
                  <input  type='text' class="form-control" placeholder="Enter in Capital Letters" name="lastname" value="{{old('name')}}">
                 <span class="text-danger">@error('name'){{$message}} @enderror</span>
-
-
                 </div>
                  <div class="form-group">
-                 <label for="email">Email</label>
+                 <label for="email">Assign Email</label>
                  <input type='text' class="form-control" placeholder="Enter Email" name="email" value="{{old('email')}}">
                  <span class="text-danger">@error('email'){{$message}} @enderror</span>
                 </div>
+                
                 <div class="form-group">
-                 <label for="password">Password</label>
+                 <label for="password">Assign Password</label>
                  <input type="password" class="form-control" placeholder="Enter Password" name="password" >
                  <span class="text-danger">@error('password'){{$message}} @enderror</span>
                 </div>
+                
 <br>
            <div class="form-group">
            <button class="btn btn-block btn-primary" type="submit">Register</button>

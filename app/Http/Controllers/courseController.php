@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\admin;
+use Session;
 
 class courseController extends Controller
 {
@@ -12,10 +14,28 @@ class courseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $admin = admin::where('email','=',$request->email)->first();
+        
+            if($admin){
+                if(Hash::check($request->password,$user->password))
+                {
+                     $request->Session()->put('loginId',$admin->id);
+                }
+                      }
+            $data=array();
+            if(Session::has('loginId')){
+        $data = admin::where('id','=',Session::get('loginId'))->first();
+            }
+            if($data->role=='1'){
        $course = Course::all();
-        return view('createcourses')->with('course',$course);    
+        return view('createcourses',compact('data'))->with('course',$course); }
+        else{
+            $course = Course::where('teacherId','=',$data->id)->get();
+            return view('createcourses',compact('data'))->with('course',$course); 
+
+        }   
     }
 
     /**
@@ -45,13 +65,17 @@ class courseController extends Controller
     {    $request->validate([
         'courseName'=>'required',
         'courseCode'=>'required|unique:courses',
-        'teacherId'=>'required'
+       
          ]); 
-               
+
+         $data=array();
+         if(Session::has('loginId')){
+             $data=admin::where('id','=',Session::get('loginId'))->first();
+         }        
         $course=new Course();
         $course->courseName=$request->courseName;
         $course->courseCode=$request->courseCode;
-        $course->teacherId=$request->teacherId;
+        $course->teacherId=$data->id;
         $course->save();
         return redirect('course');
     }

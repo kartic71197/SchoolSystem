@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\joinedCourse;
 use App\Models\User;
-
 use Hash;
+
+
 use Session;
 
 class joinedCoursesController extends Controller
@@ -34,9 +35,9 @@ class joinedCoursesController extends Controller
            
            // $joinedCourses=array();
             $joinedCourses = joinedCourse::where('email','=',$data->email)->get();
-                $list=array();       
+                  
                 $course = Course::all();
-                 return view('studentcourses',compact('joinedCourses'))->with('course',$course);    
+                 return view('studentcourses',compact('joinedCourses','data'))->with('course',$course);    
     }
 
     /**

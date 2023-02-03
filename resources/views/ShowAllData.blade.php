@@ -31,9 +31,10 @@
           </div>
     
           <div class="w3-bar-block">
-            <a href="/"  class="w3-bar-item w3-button w3-hover-white">Home</a> 
+            <a href="/admindashboard"  class="w3-bar-item w3-button w3-hover-white">Home</a> 
             <a href="course" class="w3-bar-item w3-button w3-hover-white">Create Course</a> 
             <a href="showstudents"  class="w3-bar-item w3-button w3-hover-white">View Students</a> 
+            <a href='newadmin'  class="w3-bar-item w3-button w3-hover-white">Add Admin</a> 
             <a href="/adminlogout"  class="w3-bar-item w3-button w3-hover-white">Logout</a> 
           </div>
         </nav>

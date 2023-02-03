@@ -42,3 +42,5 @@ Route::get('/admindashboard',[AdminController::class,'admindashboard']);
 Route::get('delete/{id}',[AdminController::class,'delete']);
 Route::get('/showstudents',[AdminController::class,'showstudents']);
 Route::get('/adminlogout',[AdminController::class,'adminlogout']);
+Route::view('/newadmin','newadmin');
+Route::post('/addnewadmin',[AdminController::class,'addnewadmin'])->name('addnewadmin');

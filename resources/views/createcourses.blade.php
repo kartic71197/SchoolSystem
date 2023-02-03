@@ -28,13 +28,14 @@
         <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu
         </a>
           <div class="w3-container">
-            <h3 class="w3-padding-64"><b>Welcome<br>Admin</b></h3>
+            <h3 class="w3-padding-64"><b>Welcome<br>{{$data->name}}</b></h3>
           </div>
     
           <div class="w3-bar-block">
             <a href="/admindashboard"  class="w3-bar-item w3-button w3-hover-white">Home</a> 
             <a href="course" class="w3-bar-item w3-button w3-hover-white">Create Course</a> 
             <a href="/showstudents"  class="w3-bar-item w3-button w3-hover-white">View Students</a> 
+            <a href='newadmin'  class="w3-bar-item w3-button w3-hover-white">Add Admin</a> 
             <a href="/adminlogout"  class="w3-bar-item w3-button w3-hover-white">Logout</a> 
           </div>
       </nav>
@@ -114,11 +115,7 @@
                 <input type="text" class="form-control" name="courseCode" id="courseCode">
                 <span class="text-danger">@error('courseCode'){{$message}} @enderror</span>
               </div>
-              <div class="form-group">
-                <label for="" >Teacher ID</label>
-                <input type="text" class="form-control" name="teacherId" id="teacherId">
-                <span class="text-danger">@error('teacherId'){{$message}} @enderror</span>
-              </div>
+              
               <div class="form-group">
               <input type="submit" class="form-control btn btn-success" value="Add Course" id="submit" >
               </div>
