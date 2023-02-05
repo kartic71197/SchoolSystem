@@ -7,8 +7,6 @@ use App\Models\Course;
 use App\Models\joinedCourse;
 use App\Models\User;
 use Hash;
-
-
 use Session;
 
 class joinedCoursesController extends Controller
@@ -56,18 +54,19 @@ class joinedCoursesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $req)
+    public function store($id)
     {   
      $data=array();
+     $detail=Course::find($id);
         if(Session::has('loginId')){
             $data=User::where('id','=',Session::get('loginId'))->first();
         }         
                 $joinedCourses=new joinedCourse();
                 $joinedCourses->name        = $data->name;
                 $joinedCourses->email       = $data->email;
-                $joinedCourses->courseName  = $req->courseName;
-                $joinedCourses->courseCode  = $req->courseCode;
-                $joinedCourses->teacherId   = $req->teacherId;
+                $joinedCourses->courseName  = $detail->courseName;
+                $joinedCourses->courseCode  = $detail->courseCode;
+                $joinedCourses->teacherId   = $detail->teacherId;
                 $joinedCourses->save();
                 return redirect('joinedcourses')->with('joinedcourses',$joinedCourses); 
     }
@@ -80,7 +79,7 @@ class joinedCoursesController extends Controller
      */
     public function show($id)
     {
-        $list = Course::where('id','=',id);
+        $list = Course::where('id','=',$id);
         return redirect('studentcourses')->with('list',$list);
     }
 

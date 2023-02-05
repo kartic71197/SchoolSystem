@@ -44,3 +44,4 @@ Route::get('/showstudents',[AdminController::class,'showstudents']);
 Route::get('/adminlogout',[AdminController::class,'adminlogout']);
 Route::view('/newadmin','newadmin');
 Route::post('/addnewadmin',[AdminController::class,'addnewadmin'])->name('addnewadmin');
+Route::post('joined/{id}',[joinedCoursesController::class,'store']);

@@ -113,24 +113,16 @@
                                     </thead>
                                     <tbody>
                                     @foreach($course as $c)
-                                    <form action="joinedcourses" method='POST'>       
+                                    <form action={{"joined/".$c['id']}} method='POST'>       
                                     @csrf
                                
                                     <tr>
                                         <td>{{$c->id}}</td>
-                                        <td>                                      
-                                            <input type="text" name="courseName" id="courseName" value=" {{$c->courseName}}">
-                                        </td>
-                                        <td>
-                                           
-                                            <input type="text" name="courseCode" id="courseCode" value=" {{$c->courseCode}}">
-                                        <td>
-                                           
-                                            <input type="text"  name="teacherId" id="teacherId" value=" {{$c->teacherId}}">
-                                        </td>
-                                       
+                                        <td>{{$c->courseName}}</td>
+                                        <td>{{$c->courseCode}}</td>
+                                        <td>{{$c->teacherId}}</td>
                                         <td>                                          
-                                            <input type="submit" id="submit" value="Join" class="btn btn-success">
+                                          <input type="submit" id="submit" value="Join" class="btn btn-success"> 
                                         </td>
                                     
                                     </tr>
